@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import { TimerFace } from "./TimerFace";
 
 type TimerProps = {
   seconds?: number;
   minutes?: number;
 };
 
-// 1 add a good timer digital face, with a nice font that shows remaning minutes:seconds:milliseconds
 // 2 TODO add good styling, maybe a clock face, start with a radial div turning to the remaining ratio, like the apple timer
 export function Timer({ seconds = 30 }: TimerProps) {
   // TODO add minutes and maybe hours later on
@@ -33,12 +33,12 @@ export function Timer({ seconds = 30 }: TimerProps) {
   };
 
   const restartTimer = () => {
+    // TODO handle the case where remaining is 0, maybe another button to restart etc?
     setEndTime(Date.now() + remaining * 1000);
     setStopped(false);
-    // const intervalId = setInterval(checkTimer, 100);
-    // intervalIdRef.current = intervalId;
   };
 
+  // TODO handle the milliseconds later on
   useEffect(() => {
     console.log({ remaining, stopped, intervalId: intervalIdRef.current });
     if (!stopped) {
@@ -52,8 +52,8 @@ export function Timer({ seconds = 30 }: TimerProps) {
   return (
     <div>
       <div>Timer for {seconds} seconds</div>
-      <div>Remaining: {remaining}</div>
-      {stopped ? (
+      <TimerFace remaining={remaining} />
+      {stopped || remaining === 0 ? (
         <button onClick={restartTimer}>Restart timer</button>
       ) : (
         <button onClick={stopTimer}>Stop timer</button>
