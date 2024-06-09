@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { TimerFace } from "./TimerFace";
 
-type TimerProps = {
+export type TimerProps = {
   seconds?: number;
   minutes?: number;
 };
 
+// TODO timer sound
 // 2 TODO add good styling, maybe a clock face, start with a radial div turning to the remaining ratio, like the apple timer
 export function Timer({ seconds = 30 }: TimerProps) {
   // TODO add minutes and maybe hours later on
@@ -40,7 +41,6 @@ export function Timer({ seconds = 30 }: TimerProps) {
 
   // TODO handle the milliseconds later on
   useEffect(() => {
-    console.log({ remaining, stopped, intervalId: intervalIdRef.current });
     if (!stopped) {
       // set an interval for 100ms
       const intervalId = setInterval(checkTimer, 100);
