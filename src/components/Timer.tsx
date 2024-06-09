@@ -50,7 +50,7 @@ export function Timer({ seconds = 30 }: TimerProps) {
   }, [seconds, remaining, stopped]);
 
   return (
-    <div>
+    <div className="w-full border border-slate-100 rounded p-2">
       <div>Timer for {seconds} seconds</div>
       <TimerFace remaining={remaining} />
       {stopped || remaining === 0 ? (

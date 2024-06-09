@@ -8,6 +8,7 @@ type TimerDefinition = {
 
 // TODO style in canva or figma later on
 // TODO add different timers, store them, add different timer seconds and minutes options, localstorage maybe
+// TODO delete timer
 function App() {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [timers, setTimers] = useState<TimerDefinition[]>([]);
@@ -23,16 +24,18 @@ function App() {
     }
   };
   return (
-    <main className="flex flex-col items-center h-screen bg-black text-white p-4">
-      <label htmlFor="timerLength">
+    <main className="flex flex-col gap-4 items-center h-screen bg-black text-white p-4">
+      <label className="flex gap-2 items-center" htmlFor="timerLength">
         Add a timer
         <input
           ref={inputRef}
           type="number"
           name="timerLength"
-          className="text-slate-500"
+          className="text-slate-500 rounded-sm"
         />
-        <button onClick={handleAdd}>Add</button>
+        <button onClick={handleAdd} className="rounded bg-slate-700 px-4 py-2">
+          Add
+        </button>
       </label>
       {timers.map((t) => (
         <Timer key={t.id} seconds={t.length.seconds} />
