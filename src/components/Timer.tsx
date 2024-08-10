@@ -53,7 +53,7 @@ export function Timer({ seconds = 30 }: TimerProps) {
   return (
     <div className="w-full border border-slate-100 rounded p-2">
       <div>Timer for {seconds} seconds</div>
-      <CircleProgressBar remaining={remaining} />
+      <CircleProgressBar remaining={remaining} full={seconds} />
       <TimerFace remaining={remaining} />
       {stopped || remaining === 0 ? (
         <button onClick={restartTimer}>Restart timer</button>

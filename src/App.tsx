@@ -9,6 +9,7 @@ type TimerDefinition = {
 // TODO style in canva or figma later on
 // TODO add different timers, store them, add different timer seconds and minutes options, localstorage maybe
 // TODO delete timer
+// TODO come up with a nice timer selector component like 2 hours 4 minutes 36 seconds stuff, maybe circular selection like apple?
 function App() {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [timers, setTimers] = useState<TimerDefinition[]>([]);

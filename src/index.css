@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.progress-bar {
+  background: conic-gradient(
+    rgb(77, 75, 75) var(--percentage, 0),
+    rgb(209, 209, 209) 0
+  );
+}
