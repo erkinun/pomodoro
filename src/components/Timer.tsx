@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { TimerFace } from "./TimerFace";
+import { CircleProgressBar } from "./CircleProgress";
 
 export type TimerProps = {
   seconds?: number;
@@ -52,7 +53,7 @@ export function Timer({ seconds = 30 }: TimerProps) {
   return (
     <div className="w-full border border-slate-100 rounded p-2">
       <div>Timer for {seconds} seconds</div>
-      <progress value={remaining} max={seconds} />
+      <CircleProgressBar remaining={remaining} />
       <TimerFace remaining={remaining} />
       {stopped || remaining === 0 ? (
         <button onClick={restartTimer}>Restart timer</button>
