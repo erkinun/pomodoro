@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { TimerFace } from "./TimerFace";
 import { CircleProgressBar } from "./CircleProgress";
+import beep from "../assets/sounds/beep.mp3";
 
 export type TimerProps = {
   seconds?: number;
@@ -19,10 +20,12 @@ export function Timer({ seconds = 30 }: TimerProps) {
   const [endTime, setEndTime] = useState(Date.now() + seconds * 1000);
   const intervalIdRef = useRef<number | null>(null);
 
+  const alarm = new Audio(beep);
   const checkTimer = () => {
     const now = Date.now();
     if (now >= endTime) {
       setRemaining(0);
+      alarm.play(); // TODO better place to do these stuff?
       clearInterval(intervalIdRef.current ?? undefined);
     } else {
       setRemaining(Math.floor((endTime - now) / 1000));
@@ -30,6 +33,7 @@ export function Timer({ seconds = 30 }: TimerProps) {
   };
 
   const stopTimer = () => {
+    alarm.pause();
     clearInterval(intervalIdRef.current ?? undefined);
     setStopped(true);
   };
@@ -46,12 +50,15 @@ export function Timer({ seconds = 30 }: TimerProps) {
       // set an interval for 100ms
       const intervalId = setInterval(checkTimer, 100);
       intervalIdRef.current = intervalId;
-      return () => clearInterval(intervalId);
+      return () => {
+        alarm.pause();
+        clearInterval(intervalId);
+      };
     }
   }, [seconds, remaining, stopped]);
 
   return (
-    <div className="w-full border border-slate-100 rounded p-2">
+    <div className="w-full border border-slate-100 rounded p-2 grow">
       <div>Timer for {seconds} seconds</div>
       <CircleProgressBar remaining={remaining} full={seconds} />
       <TimerFace remaining={remaining} />

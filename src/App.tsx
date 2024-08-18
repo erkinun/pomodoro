@@ -6,10 +6,11 @@ type TimerDefinition = {
   length: TimerProps;
 };
 
+// TODO come up with a nice timer selector component like 2 hours 4 minutes 36 seconds stuff, maybe circular selection like apple?
+// TODO enter button at top input for timer adds timer
+// TODO sound off configuration
 // TODO style in canva or figma later on
 // TODO add different timers, store them, add different timer seconds and minutes options, localstorage maybe
-// TODO delete timer
-// TODO come up with a nice timer selector component like 2 hours 4 minutes 36 seconds stuff, maybe circular selection like apple?
 function App() {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [timers, setTimers] = useState<TimerDefinition[]>([]);
@@ -24,6 +25,9 @@ function App() {
       ]);
     }
   };
+  function handleDelete(id: string) {
+    setTimers((prev) => prev.filter((t) => t.id !== id));
+  }
   return (
     <main className="flex flex-col gap-4 items-center h-screen bg-black text-white p-4">
       <label className="flex gap-2 items-center" htmlFor="timerLength">
@@ -39,7 +43,10 @@ function App() {
         </button>
       </label>
       {timers.map((t) => (
-        <Timer key={t.id} seconds={t.length.seconds} />
+        <div className="flex gap-2 w-full">
+          <Timer key={t.id} seconds={t.length.seconds} />
+          <button onClick={() => handleDelete(t.id)}>Delete</button>
+        </div>
       ))}
     </main>
   );
