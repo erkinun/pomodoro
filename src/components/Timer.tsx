@@ -8,7 +8,18 @@ export type TimerProps = {
   minutes?: number;
 };
 
-// TODO timer sound
+function TimerBtn({ onClick, text }: { onClick: (e) => void; text: string }) {
+  return (
+    <button
+      className="block p-2 rounded border border-gray-300 hover:bg-gray-300 "
+      onClick={onClick}
+    >
+      {text}
+    </button>
+  );
+}
+
+// TODO shup up sound
 // 2 TODO add good styling, maybe a clock face, start with a radial div turning to the remaining ratio, like the apple timer
 export function Timer({ seconds = 30 }: TimerProps) {
   // TODO add minutes and maybe hours later on
@@ -63,9 +74,12 @@ export function Timer({ seconds = 30 }: TimerProps) {
       <CircleProgressBar remaining={remaining} full={seconds} />
       <TimerFace remaining={remaining} />
       {stopped || remaining === 0 ? (
-        <button onClick={restartTimer}>Restart timer</button>
+        <div className="block">
+          <TimerBtn text="Restart timer" onClick={restartTimer} />
+          <TimerBtn text="Shut up the alarm" onClick={() => alarm.pause()} />
+        </div>
       ) : (
-        <button onClick={stopTimer}>Stop timer</button>
+        <TimerBtn onClick={stopTimer} text="Stop timer" />
       )}
     </div>
   );
