@@ -6,6 +6,7 @@ type TimerDefinition = {
   length: TimerProps;
 };
 
+// TODO add the enter key to add a timer
 // TODO persist old timers in localstorage
 // TODO come up with a nice timer selector component like 2 hours 4 minutes 36 seconds stuff, maybe circular selection like apple?
 // TODO enter button at top input for timer adds timer

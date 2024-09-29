@@ -8,7 +8,13 @@ export type TimerProps = {
   minutes?: number;
 };
 
-function TimerBtn({ onClick, text }: { onClick: (e) => void; text: string }) {
+function TimerBtn({
+  onClick,
+  text,
+}: {
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  text: string;
+}) {
   return (
     <button
       className="block p-2 rounded border border-gray-300 hover:bg-gray-300 "
