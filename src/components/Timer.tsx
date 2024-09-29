@@ -19,8 +19,7 @@ function TimerBtn({ onClick, text }: { onClick: (e) => void; text: string }) {
   );
 }
 
-// TODO shup up sound
-// 2 TODO add good styling, maybe a clock face, start with a radial div turning to the remaining ratio, like the apple timer
+// 2 TODO add good styling
 export function Timer({ seconds = 30 }: TimerProps) {
   // TODO add minutes and maybe hours later on
   // TODO show in milliseconds maybe?
@@ -76,7 +75,7 @@ export function Timer({ seconds = 30 }: TimerProps) {
       {stopped || remaining === 0 ? (
         <div className="block">
           <TimerBtn text="Restart timer" onClick={restartTimer} />
-          <TimerBtn text="Shut up the alarm" onClick={() => alarm.pause()} />
+          <TimerBtn text="Stop the alarm" onClick={() => alarm.pause()} />
         </div>
       ) : (
         <TimerBtn onClick={stopTimer} text="Stop timer" />

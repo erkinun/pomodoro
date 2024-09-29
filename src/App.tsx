@@ -44,9 +44,14 @@ function App() {
         </button>
       </label>
       {timers.map((t) => (
-        <div className="flex gap-2 w-full">
+        <div className="flex gap-2 w-full items-center">
           <Timer key={t.id} seconds={t.length.seconds} />
-          <button onClick={() => handleDelete(t.id)}>Delete</button>
+          <button
+            className="bg-red-800 rounded border border-red-900 h-16 w-16 text-lg"
+            onClick={() => handleDelete(t.id)}
+          >
+            Delete
+          </button>
         </div>
       ))}
     </main>
